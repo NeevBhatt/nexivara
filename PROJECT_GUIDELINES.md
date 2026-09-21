@@ -1,4 +1,4 @@
-# 🏥 MediCo — Smart Healthcare Appointment & Management System
+# 🏥 Nexivara — Smart Healthcare Appointment & Management System
 
 > **College DBMS Project**
 > **Team:** Neev & Jatin
@@ -7,7 +7,7 @@
 
 ## 1. Project Overview
 
-**MediCo** is a healthcare appointment and management web application that connects patients, doctors, and administrators through a single platform.
+**Nexivara** is a healthcare appointment and management web application that connects patients, doctors, and administrators through a single platform.
 
 The system allows patients to discover doctors, check availability, book appointments, track appointment status, access prescriptions, and review doctors.
 
@@ -32,7 +32,7 @@ Build a **professional-looking but manageable full-stack DBMS project** that dem
 | Backend Platform    | Supabase      |
 | Database            | PostgreSQL    |
 | Authentication      | Supabase Auth |
-| Coding              | Antigravity   |
+| Coding              | any model.    |
 | Version Control     | Git + GitHub  |
 
 ### Architecture
@@ -664,7 +664,7 @@ Do not connect the first prototype to Supabase.
 
 ---
 
-## Antigravity
+## Claude
 
 Use for:
 
@@ -1196,7 +1196,7 @@ The project should look like a real healthcare application while remaining simpl
 The priority is:
 
 ```text
-                    MEDICO
+                   Nexivara
                        │
        ┌───────────────┼────────────────┐
        ▼               ▼                ▼
