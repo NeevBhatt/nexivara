@@ -1,6 +1,29 @@
 -- NEXIVARA ALL-IN-ONE SUPABASE SETUP & DEMO DATA SCRIPT
 -- Paste this entire file into Supabase SQL Editor and click RUN.
 
+-- ============================================================================
+-- 0. CLEAN UP EXISTING OBJECTS (Prevents "relation already exists" errors)
+-- ============================================================================
+DROP VIEW IF EXISTS doctor_appointment_summary CASCADE;
+DROP VIEW IF EXISTS doctor_rating_details CASCADE;
+DROP VIEW IF EXISTS patient_appointment_history CASCADE;
+DROP VIEW IF EXISTS prescription_details CASCADE;
+DROP VIEW IF EXISTS appointment_calendar CASCADE;
+
+DROP TABLE IF EXISTS notifications CASCADE;
+DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS prescription_medicines CASCADE;
+DROP TABLE IF EXISTS prescriptions CASCADE;
+DROP TABLE IF EXISTS medicines CASCADE;
+DROP TABLE IF EXISTS appointments CASCADE;
+DROP TABLE IF EXISTS doctor_schedules CASCADE;
+DROP TABLE IF EXISTS patients CASCADE;
+DROP TABLE IF EXISTS doctors CASCADE;
+DROP TABLE IF EXISTS specializations CASCADE;
+DROP TABLE IF EXISTS profiles CASCADE;
+
+DROP FUNCTION IF EXISTS update_updated_at_column() CASCADE;
+DROP FUNCTION IF EXISTS public.get_user_role() CASCADE;
 
 -- ============================================================================
 -- FILE: supabase/migrations/20260921000001_initial_schema.sql
