@@ -44,29 +44,96 @@ BEGIN
         email,
         encrypted_password,
         email_confirmed_at,
+        confirmation_token,
+        recovery_token,
+        email_change_token_new,
+        email_change,
         raw_app_meta_data,
         raw_user_meta_data,
         created_at,
         updated_at
     )
     VALUES
-        ('00000000-0000-0000-0000-000000000000', 'a1111111-1111-1111-1111-111111111111', 'authenticated', 'authenticated', 'john.smith@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "John Smith"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'a2222222-2222-2222-2222-222222222222', 'authenticated', 'authenticated', 'maria.garcia@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Maria Garcia"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'a3333333-3333-3333-3333-333333333333', 'authenticated', 'authenticated', 'li.wei@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Li Wei"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'a4444444-4444-4444-4444-444444444444', 'authenticated', 'authenticated', 'sarah.jones@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Sarah Jones"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'a5555555-5555-5555-5555-555555555555', 'authenticated', 'authenticated', 'david.chen@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "David Chen"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'a6666666-6666-6666-6666-666666666666', 'authenticated', 'authenticated', 'olga.petrov@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Olga Petrov"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'a7777777-7777-7777-7777-777777777777', 'authenticated', 'authenticated', 'ahmed.hassan@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Ahmed Hassan"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'a8888888-8888-8888-8888-888888888888', 'authenticated', 'authenticated', 'emily.wilson@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Emily Wilson"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'a9999999-9999-9999-9999-999999999999', 'authenticated', 'authenticated', 'michael.brown@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Michael Brown"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'd1111111-1111-1111-1111-111111111111', 'authenticated', 'authenticated', 'dr.johnson@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Robert Johnson"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'd2222222-2222-2222-2222-222222222222', 'authenticated', 'authenticated', 'dr.chen@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Lisa Chen"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'd3333333-3333-3333-3333-333333333333', 'authenticated', 'authenticated', 'dr.patel@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Sanjay Patel"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'd4444444-4444-4444-4444-444444444444', 'authenticated', 'authenticated', 'dr.williams@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Jennifer Williams"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'd5555555-5555-5555-5555-555555555555', 'authenticated', 'authenticated', 'dr.kim@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Min-ji Kim"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'd6666666-6666-6666-6666-666666666666', 'authenticated', 'authenticated', 'dr.rodriguez@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Carlos Rodriguez"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'ad000001-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'admin@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "System Administrator"}', NOW(), NOW())
-    ON CONFLICT (id) DO UPDATE SET encrypted_password = EXCLUDED.encrypted_password, email_confirmed_at = EXCLUDED.email_confirmed_at;
+        ('00000000-0000-0000-0000-000000000000', 'a1111111-1111-1111-1111-111111111111', 'authenticated', 'authenticated', 'john.smith@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "John Smith"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a2222222-2222-2222-2222-222222222222', 'authenticated', 'authenticated', 'maria.garcia@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Maria Garcia"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a3333333-3333-3333-3333-333333333333', 'authenticated', 'authenticated', 'li.wei@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Li Wei"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a4444444-4444-4444-4444-444444444444', 'authenticated', 'authenticated', 'sarah.jones@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Sarah Jones"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a5555555-5555-5555-5555-555555555555', 'authenticated', 'authenticated', 'david.chen@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "David Chen"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a6666666-6666-6666-6666-666666666666', 'authenticated', 'authenticated', 'olga.petrov@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Olga Petrov"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a7777777-7777-7777-7777-777777777777', 'authenticated', 'authenticated', 'ahmed.hassan@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Ahmed Hassan"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a8888888-8888-8888-8888-888888888888', 'authenticated', 'authenticated', 'emily.wilson@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Emily Wilson"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a9999999-9999-9999-9999-999999999999', 'authenticated', 'authenticated', 'michael.brown@example.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Michael Brown"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd1111111-1111-1111-1111-111111111111', 'authenticated', 'authenticated', 'dr.johnson@nexivara.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Robert Johnson"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd2222222-2222-2222-2222-222222222222', 'authenticated', 'authenticated', 'dr.chen@nexivara.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Lisa Chen"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd3333333-3333-3333-3333-333333333333', 'authenticated', 'authenticated', 'dr.patel@nexivara.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Sanjay Patel"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd4444444-4444-4444-4444-444444444444', 'authenticated', 'authenticated', 'dr.williams@nexivara.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Jennifer Williams"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd5555555-5555-5555-5555-555555555555', 'authenticated', 'authenticated', 'dr.kim@nexivara.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Min-ji Kim"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd6666666-6666-6666-6666-666666666666', 'authenticated', 'authenticated', 'dr.rodriguez@nexivara.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Carlos Rodriguez"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'ad000001-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'admin@nexivara.com', enc_pw, NOW(), '', '', '', '', '{"provider":"email","providers":["email"]}', '{"full_name": "System Administrator"}', NOW(), NOW())
+    ON CONFLICT (id) DO UPDATE SET 
+        encrypted_password = EXCLUDED.encrypted_password, 
+        email_confirmed_at = EXCLUDED.email_confirmed_at,
+        confirmation_token = '',
+        recovery_token = '',
+        email_change = '',
+        email_change_token_new = '';
+
+    -- Fix any NULL string tokens across auth.users preventing GoTrue scan errors
+    UPDATE auth.users
+    SET 
+        confirmation_token = COALESCE(confirmation_token, ''),
+        recovery_token = COALESCE(recovery_token, ''),
+        email_change = COALESCE(email_change, ''),
+        email_change_token_new = COALESCE(email_change_token_new, '');
+
+    -- Insert matching auth.identities required for Supabase email/password authentication
+    BEGIN
+        INSERT INTO auth.identities (
+            id,
+            user_id,
+            provider_id,
+            identity_data,
+            provider,
+            last_sign_in_at,
+            created_at,
+            updated_at
+        )
+        SELECT 
+            u.id::text,
+            u.id,
+            u.id::text,
+            jsonb_build_object('sub', u.id::text, 'email', u.email),
+            'email',
+            NOW(),
+            NOW(),
+            NOW()
+        FROM auth.users u
+        ON CONFLICT (provider, id) DO NOTHING;
+    EXCEPTION WHEN OTHERS THEN
+        BEGIN
+            INSERT INTO auth.identities (
+                id,
+                user_id,
+                identity_data,
+                provider,
+                last_sign_in_at,
+                created_at,
+                updated_at
+            )
+            SELECT 
+                u.id::text,
+                u.id,
+                jsonb_build_object('sub', u.id::text, 'email', u.email),
+                'email',
+                NOW(),
+                NOW(),
+                NOW()
+            FROM auth.users u
+            ON CONFLICT (provider, id) DO NOTHING;
+        EXCEPTION WHEN OTHERS THEN
+            NULL;
+        END;
+    END;
 EXCEPTION
     WHEN OTHERS THEN
         NULL;
