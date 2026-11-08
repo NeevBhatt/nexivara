@@ -563,8 +563,17 @@ ORDER BY appointment_date DESC;
    - Replaced `.env.example` hardcoded project reference with placeholder template.
 
 ### Production Build & Lint Verification
-- **Linter (`oxlint`)**: 0 errors, clean code across all 23 files.
+- **Linter (`oxlint`)**: 0 errors, clean code across all files.
 - **Vite Build (`npm run build`)**: Succeeded with 0 errors, output in `frontend/dist/`.
+
+### Deployment Status
+- **Live Netlify URL**: [https://nexivera.netlify.app/](https://nexivera.netlify.app/)
+- **SPA Rewrites**: Configured in `netlify.toml` and `frontend/public/_redirects` (`/* -> /index.html 200`).
+- **Live Verification**:
+  - Homepage (`/`) loads with HTTP 200 OK and renders Nexivara hero, login, and registration buttons.
+  - Authentication routes (`/login`, `/register`) render properly without 404 errors.
+  - Protected routes (`/admin/dashboard`, `/doctor/dashboard`, `/patient/dashboard`) cleanly enforce authorization and redirect unauthenticated users to `/login`.
+  - Fallback Supabase client initialization prevents blank-screen fatal crashes when environment variables are omitted.
 
 ---
 
