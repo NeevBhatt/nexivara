@@ -261,20 +261,7 @@ END $$;
 -- ============================================================================
 -- SUCCESS MESSAGE
 -- ============================================================================
-\echo ''
-\echo '==========================================================='
-\echo 'PHASE 2C COMPLETE - DBMS FEATURES IMPLEMENTED'
-\echo '==========================================================='
-\echo ''
-\echo 'Views Created (5 total):'
-\echo '  1. doctor_appointment_summary - Doctor stats & appointments'
-\echo '  2. doctor_rating_details - Rating breakdown & distribution'
-\echo '  3. patient_appointment_history - Full patient appointment history'
-\echo '  4. prescription_details - Prescriptions with all medicines'
-\echo '  5. appointment_calendar - Calendar-friendly appointment data'
-\echo ''
-\echo 'Trigger (already exists):'
-\echo '  • updated_at auto-update on record modification'
-\echo ''
-\echo 'All views verified and working with demo data ✓'
-\echo '==========================================================='
+DO $$
+BEGIN
+    RAISE NOTICE 'PHASE 2C COMPLETE - DBMS FEATURES IMPLEMENTED';
+END $$;

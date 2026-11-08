@@ -536,22 +536,7 @@ END $$;
 -- ============================================================================
 -- SUCCESS MESSAGE
 -- ============================================================================
-\echo ''
-\echo '==========================================================='
-\echo 'PHASE 2B COMPLETE - DEMO DATA SUCCESSFULLY LOADED'
-\echo '==========================================================='
-\echo ''
-\echo 'Database now contains realistic fictional demo data:'
-\echo '  • 6 doctors across various specializations'
-\echo '  • 9 patients with demographic information'
-\echo '  • 12 doctor availability schedules'
-\echo '  • 9 appointments (pending, confirmed, completed, cancelled, rejected)'
-\echo '  • 3 prescriptions with detailed diagnosis'
-\echo '  • 6 prescription medicines using existing medicine catalog'
-\echo '  • 3 patient reviews (5-star ratings)'
-\echo '  • 9 notifications for various events'
-\echo ''
-\echo 'All foreign key relationships verified ✓'
-\echo 'All business rules enforced ✓'
-\echo 'Ready for application development and testing'
-\echo '==========================================================='
+DO $$
+BEGIN
+    RAISE NOTICE 'PHASE 2B COMPLETE - DEMO DATA SUCCESSFULLY LOADED';
+END $$;
