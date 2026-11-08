@@ -28,7 +28,7 @@
 
 **Phase:** Phase 4 - Core Application ✅
 
-**Overall Progress:** 98%
+**Overall Progress:** 100%
 
 **Last Updated:** 08-11-2026
 
@@ -562,12 +562,18 @@ ORDER BY appointment_date DESC;
    - Verified that `.env` is completely ignored in `.gitignore`.
    - Replaced `.env.example` hardcoded project reference with placeholder template.
 
+9. **PostgreSQL Schema & UUID Hex Constraint Resolution**:
+   - Replaced all non-hex legacy UUIDs (`admin001-...`, `p1111111-...`, `apt11111-...`, `prx11111-...`) with valid RFC4122 hexadecimal UUIDs (`ad000001-...`, `b1111111-...`, `c0011111-...`, `ee011111-...`), resolving PostgreSQL error `22P02: invalid input syntax for type uuid`.
+   - Added idempotent cleanup statements (`DROP VIEW/TABLE IF EXISTS ... CASCADE;`) at the top of `supabase/ALL_IN_ONE_SETUP.sql` to eliminate error `42P07: relation already exists`.
+   - Replaced psql meta-commands with native PL/pgSQL notices so the script runs cleanly in the web Supabase SQL editor.
+
 ### Production Build & Lint Verification
 - **Linter (`oxlint`)**: 0 errors, clean code across all files.
 - **Vite Build (`npm run build`)**: Succeeded with 0 errors, output in `frontend/dist/`.
 
-### Deployment Status
+### Deployment & Repository Status
 - **Live Netlify URL**: [https://nexivera.netlify.app/](https://nexivera.netlify.app/)
+- **GitHub Repository**: [https://github.com/NeevBhatt/nexivara.git](https://github.com/NeevBhatt/nexivara.git) (Branch `main`, latest commit pushed).
 - **SPA Rewrites**: Configured in `netlify.toml` and `frontend/public/_redirects` (`/* -> /index.html 200`).
 - **Live Verification**:
   - Homepage (`/`) loads with HTTP 200 OK and renders Nexivara hero, login, and registration buttons.
