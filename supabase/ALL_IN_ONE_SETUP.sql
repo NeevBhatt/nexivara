@@ -401,7 +401,7 @@ BEGIN
         ('00000000-0000-0000-0000-000000000000', 'd4444444-4444-4444-4444-444444444444', 'authenticated', 'authenticated', 'dr.williams@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Jennifer Williams"}', NOW(), NOW()),
         ('00000000-0000-0000-0000-000000000000', 'd5555555-5555-5555-5555-555555555555', 'authenticated', 'authenticated', 'dr.kim@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Min-ji Kim"}', NOW(), NOW()),
         ('00000000-0000-0000-0000-000000000000', 'd6666666-6666-6666-6666-666666666666', 'authenticated', 'authenticated', 'dr.rodriguez@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Carlos Rodriguez"}', NOW(), NOW()),
-        ('00000000-0000-0000-0000-000000000000', 'admin001-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'admin@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "System Administrator"}', NOW(), NOW())
+        ('00000000-0000-0000-0000-000000000000', 'ad000001-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'admin@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "System Administrator"}', NOW(), NOW())
     ON CONFLICT (id) DO UPDATE SET encrypted_password = EXCLUDED.encrypted_password, email_confirmed_at = EXCLUDED.email_confirmed_at;
 EXCEPTION
     WHEN OTHERS THEN
@@ -429,21 +429,21 @@ INSERT INTO profiles (id, email, full_name, phone, role) VALUES
 ('d6666666-6666-6666-6666-666666666666', 'dr.rodriguez@nexivara.com', 'Dr. Carlos Rodriguez', '+1-555-0206', 'doctor'),
 
 -- Admin (1 admin user)
-('admin001-0000-0000-0000-000000000000', 'admin@nexivara.com', 'System Administrator', '+1-555-0000', 'admin');
+('ad000001-0000-0000-0000-000000000000', 'admin@nexivara.com', 'System Administrator', '+1-555-0000', 'admin');
 
 -- ============================================================================
 -- 2. PATIENTS (Patient-specific information)
 -- ============================================================================
 INSERT INTO patients (id, profile_id, date_of_birth, gender, address) VALUES
-('p1111111-1111-1111-1111-111111111111', 'a1111111-1111-1111-1111-111111111111', '1985-03-15', 'male', '123 Main Street, Springfield, IL 62701'),
-('p2222222-2222-2222-2222-222222222222', 'a2222222-2222-2222-2222-222222222222', '1992-07-22', 'female', '456 Oak Avenue, Rivertown, CA 94102'),
-('p3333333-3333-3333-3333-333333333333', 'a3333333-3333-3333-3333-333333333333', '1978-11-05', 'male', '789 Pine Road, Lakeside, NY 10001'),
-('p4444444-4444-4444-4444-444444444444', 'a4444444-4444-4444-4444-444444444444', '2000-01-30', 'female', '101 Maple Lane, Hilltop, TX 75001'),
-('p5555555-5555-5555-5555-555555555555', 'a5555555-5555-5555-5555-555555555555', '1995-09-18', 'male', '202 Cedar Street, Valleyview, WA 98001'),
-('p6666666-6666-6666-6666-666666666666', 'a6666666-6666-6666-6666-666666666666', '1988-12-25', 'female', '303 Elm Court, Mountainville, CO 80201'),
-('p7777777-7777-7777-7777-777777777777', 'a7777777-7777-7777-7777-777777777777', '1999-04-12', 'male', '404 Birch Boulevard, Seaside, FL 33101'),
-('p8888888-8888-8888-8888-888888888888', 'a8888888-8888-8888-8888-888888888888', '1975-06-08', 'female', '505 Redwood Drive, Sunset City, OR 97001'),
-('p9999999-9999-9999-9999-999999999999', 'a9999999-9999-9999-9999-999999999999', '1993-02-28', 'male', '606 Sequoia Street, Sunrise Town, AZ 85001');
+('b1111111-1111-1111-1111-111111111111', 'a1111111-1111-1111-1111-111111111111', '1985-03-15', 'male', '123 Main Street, Springfield, IL 62701'),
+('b2222222-2222-2222-2222-222222222222', 'a2222222-2222-2222-2222-222222222222', '1992-07-22', 'female', '456 Oak Avenue, Rivertown, CA 94102'),
+('b3333333-3333-3333-3333-333333333333', 'a3333333-3333-3333-3333-333333333333', '1978-11-05', 'male', '789 Pine Road, Lakeside, NY 10001'),
+('b4444444-4444-4444-4444-444444444444', 'a4444444-4444-4444-4444-444444444444', '2000-01-30', 'female', '101 Maple Lane, Hilltop, TX 75001'),
+('b5555555-5555-5555-5555-555555555555', 'a5555555-5555-5555-5555-555555555555', '1995-09-18', 'male', '202 Cedar Street, Valleyview, WA 98001'),
+('b6666666-6666-6666-6666-666666666666', 'a6666666-6666-6666-6666-666666666666', '1988-12-25', 'female', '303 Elm Court, Mountainville, CO 80201'),
+('b7777777-7777-7777-7777-777777777777', 'a7777777-7777-7777-7777-777777777777', '1999-04-12', 'male', '404 Birch Boulevard, Seaside, FL 33101'),
+('b8888888-8888-8888-8888-888888888888', 'a8888888-8888-8888-8888-888888888888', '1975-06-08', 'female', '505 Redwood Drive, Sunset City, OR 97001'),
+('b9999999-9999-9999-9999-999999999999', 'a9999999-9999-9999-9999-999999999999', '1993-02-28', 'male', '606 Sequoia Street, Sunrise Town, AZ 85001');
 
 -- ============================================================================
 -- 3. DOCTORS (Doctor-specific information linked to existing specializations)
@@ -559,39 +559,39 @@ INSERT INTO doctor_schedules (doctor_id, day_of_week, start_time, end_time, is_a
 
 -- Appointment 1: COMPLETED - John with Dr. Johnson (Cardiologist)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason, notes) VALUES
-('apt11111-1111-1111-1111-111111111111', 'p1111111-1111-1111-1111-111111111111', 'd1111111-1111-1111-1111-111111111111', '2026-09-15', '10:00:00', 'completed', 'Annual cardiac checkup', 'Patient vitals normal. ECG performed.');
+('c0011111-1111-1111-1111-111111111111', 'b1111111-1111-1111-1111-111111111111', 'd1111111-1111-1111-1111-111111111111', '2026-09-15', '10:00:00', 'completed', 'Annual cardiac checkup', 'Patient vitals normal. ECG performed.');
 
 -- Appointment 2: CONFIRMED - Maria with Dr. Chen (Dermatologist)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason) VALUES
-('apt22222-2222-2222-2222-222222222222', 'p2222222-2222-2222-2222-222222222222', 'd2222222-2222-2222-2222-222222222222', '2026-09-24', '11:00:00', 'confirmed', 'Skin rash evaluation');
+('c0022222-2222-2222-2222-222222222222', 'b2222222-2222-2222-2222-222222222222', 'd2222222-2222-2222-2222-222222222222', '2026-09-24', '11:00:00', 'confirmed', 'Skin rash evaluation');
 
 -- Appointment 3: PENDING - Li Wei with Dr. Patel (General Medicine)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason) VALUES
-('apt33333-3333-3333-3333-333333333333', 'p3333333-3333-3333-3333-333333333333', 'd3333333-3333-3333-3333-333333333333', '2026-09-25', '09:00:00', 'pending', 'General health consultation');
+('c0033333-3333-3333-3333-333333333333', 'b3333333-3333-3333-3333-333333333333', 'd3333333-3333-3333-3333-333333333333', '2026-09-25', '09:00:00', 'pending', 'General health consultation');
 
 -- Appointment 4: CANCELLED - Sarah with Dr. Williams (Pediatrics)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason, notes) VALUES
-('apt44444-4444-4444-4444-444444444444', 'p4444444-4444-4444-4444-444444444444', 'd4444444-4444-4444-4444-444444444444', '2026-09-20', '14:00:00', 'cancelled', 'Child vaccination', 'Cancelled by patient - child has fever');
+('c0044444-4444-4444-4444-444444444444', 'b4444444-4444-4444-4444-444444444444', 'd4444444-4444-4444-4444-444444444444', '2026-09-20', '14:00:00', 'cancelled', 'Child vaccination', 'Cancelled by patient - child has fever');
 
 -- Appointment 5: COMPLETED - David with Dr. Kim (Psychiatrist)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason) VALUES
-('apt55555-5555-5555-5555-555555555555', 'p5555555-5555-5555-5555-555555555555', 'd5555555-5555-5555-5555-555555555555', '2026-09-18', '15:00:00', 'completed', 'Anxiety management consultation');
+('c0055555-5555-5555-5555-555555555555', 'b5555555-5555-5555-5555-555555555555', 'd5555555-5555-5555-5555-555555555555', '2026-09-18', '15:00:00', 'completed', 'Anxiety management consultation');
 
 -- Appointment 6: CONFIRMED - Olga with Dr. Rodriguez (Orthopedics)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason) VALUES
-('apt66666-6666-6666-6666-666666666666', 'p6666666-6666-6666-6666-666666666666', 'd6666666-6666-6666-6666-666666666666', '2026-09-26', '10:30:00', 'confirmed', 'Knee pain consultation');
+('c0066666-6666-6666-6666-666666666666', 'b6666666-6666-6666-6666-666666666666', 'd6666666-6666-6666-6666-666666666666', '2026-09-26', '10:30:00', 'confirmed', 'Knee pain consultation');
 
 -- Appointment 7: PENDING - Ahmed with Dr. Johnson (Cardiologist)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason) VALUES
-('apt77777-7777-7777-7777-777777777777', 'p7777777-7777-7777-7777-777777777777', 'd1111111-1111-1111-1111-111111111111', '2026-09-27', '11:30:00', 'pending', 'High blood pressure follow-up');
+('c0077777-7777-7777-7777-777777777777', 'b7777777-7777-7777-7777-777777777777', 'd1111111-1111-1111-1111-111111111111', '2026-09-27', '11:30:00', 'pending', 'High blood pressure follow-up');
 
 -- Appointment 8: COMPLETED - Emily with Dr. Chen (Dermatologist)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason) VALUES
-('apt88888-8888-8888-8888-888888888888', 'p8888888-8888-8888-8888-888888888888', 'd2222222-2222-2222-2222-222222222222', '2026-09-17', '14:30:00', 'completed', 'Acne treatment follow-up');
+('c0088888-8888-8888-8888-888888888888', 'b8888888-8888-8888-8888-888888888888', 'd2222222-2222-2222-2222-222222222222', '2026-09-17', '14:30:00', 'completed', 'Acne treatment follow-up');
 
 -- Appointment 9: REJECTED - Michael with Dr. Patel (General Medicine)
 INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointment_time, status, reason, notes) VALUES
-('apt99999-9999-9999-9999-999999999999', 'p9999999-9999-9999-9999-999999999999', 'd3333333-3333-3333-3333-333333333333', '2026-09-21', '10:00:00', 'rejected', 'Emergency consultation', 'Doctor unavailable. Please reschedule for next week.');
+('c0099999-9999-9999-9999-999999999999', 'b9999999-9999-9999-9999-999999999999', 'd3333333-3333-3333-3333-333333333333', '2026-09-21', '10:00:00', 'rejected', 'Emergency consultation', 'Doctor unavailable. Please reschedule for next week.');
 
 -- ============================================================================
 -- 6. PRESCRIPTIONS (For completed appointments only)
@@ -599,19 +599,19 @@ INSERT INTO appointments (id, patient_id, doctor_id, appointment_date, appointme
 
 -- Prescription 1: For John's cardiac checkup (completed appointment)
 INSERT INTO prescriptions (id, appointment_id, doctor_id, patient_id, diagnosis, notes) VALUES
-('prx11111-1111-1111-1111-111111111111', 'apt11111-1111-1111-1111-111111111111', 'd1111111-1111-1111-1111-111111111111', 'p1111111-1111-1111-1111-111111111111',
+('ee011111-1111-1111-1111-111111111111', 'c0011111-1111-1111-1111-111111111111', 'd1111111-1111-1111-1111-111111111111', 'b1111111-1111-1111-1111-111111111111',
 'Mild hypertension, pre-diabetic condition',
 'Patient advised to reduce salt intake, increase physical activity, and monitor blood pressure weekly. Follow-up in 3 months.');
 
 -- Prescription 2: For David's anxiety consultation (completed appointment)
 INSERT INTO prescriptions (id, appointment_id, doctor_id, patient_id, diagnosis, notes) VALUES
-('prx22222-2222-2222-2222-222222222222', 'apt55555-5555-5555-5555-555555555555', 'd5555555-5555-5555-5555-555555555555', 'p5555555-5555-5555-5555-555555555555',
+('ee022222-2222-2222-2222-222222222222', 'c0055555-5555-5555-5555-555555555555', 'd5555555-5555-5555-5555-555555555555', 'b5555555-5555-5555-5555-555555555555',
 'Generalized anxiety disorder, mild depression',
 'Patient responding well to CBT therapy. Continue mindfulness exercises daily. Schedule weekly sessions for next month.');
 
 -- Prescription 3: For Emily's acne treatment (completed appointment)
 INSERT INTO prescriptions (id, appointment_id, doctor_id, patient_id, diagnosis, notes) VALUES
-('prx33333-3333-3333-3333-333333333333', 'apt88888-8888-8888-8888-888888888888', 'd2222222-2222-2222-2222-222222222222', 'p8888888-8888-8888-8888-888888888888',
+('ee033333-3333-3333-3333-333333333333', 'c0088888-8888-8888-8888-888888888888', 'd2222222-2222-2222-2222-222222222222', 'b8888888-8888-8888-8888-888888888888',
 'Acne vulgaris - moderate severity',
 'Improvement noted from previous visit. Continue topical treatment and maintain strict skincare routine. Avoid oil-based cosmetics.');
 
@@ -622,7 +622,7 @@ INSERT INTO prescriptions (id, appointment_id, doctor_id, patient_id, diagnosis,
 -- For Prescription 1 (Hypertension and pre-diabetes)
 INSERT INTO prescription_medicines (prescription_id, medicine_id, dosage, frequency, duration, instructions)
 SELECT
-    'prx11111-1111-1111-1111-111111111111',
+    'ee011111-1111-1111-1111-111111111111',
     id,
     '5mg',
     'Once daily',
@@ -632,7 +632,7 @@ FROM medicines WHERE name = 'Amlodipine 5mg' LIMIT 1;
 
 INSERT INTO prescription_medicines (prescription_id, medicine_id, dosage, frequency, duration, instructions)
 SELECT
-    'prx11111-1111-1111-1111-111111111111',
+    'ee011111-1111-1111-1111-111111111111',
     id,
     '500mg',
     'Twice daily',
@@ -643,7 +643,7 @@ FROM medicines WHERE name = 'Metformin 500mg' LIMIT 1;
 -- For Prescription 2 (Anxiety - supportive medications)
 INSERT INTO prescription_medicines (prescription_id, medicine_id, dosage, frequency, duration, instructions)
 SELECT
-    'prx22222-2222-2222-2222-222222222222',
+    'ee022222-2222-2222-2222-222222222222',
     id,
     '20mg',
     'Once daily before breakfast',
@@ -653,7 +653,7 @@ FROM medicines WHERE name = 'Omeprazole 20mg' LIMIT 1;
 
 INSERT INTO prescription_medicines (prescription_id, medicine_id, dosage, frequency, duration, instructions)
 SELECT
-    'prx22222-2222-2222-2222-222222222222',
+    'ee022222-2222-2222-2222-222222222222',
     id,
     '1000 IU',
     'Once daily',
@@ -664,7 +664,7 @@ FROM medicines WHERE name = 'Vitamin D3 1000IU' LIMIT 1;
 -- For Prescription 3 (Acne treatment)
 INSERT INTO prescription_medicines (prescription_id, medicine_id, dosage, frequency, duration, instructions)
 SELECT
-    'prx33333-3333-3333-3333-333333333333',
+    'ee033333-3333-3333-3333-333333333333',
     id,
     '500mg',
     'Twice daily',
@@ -674,7 +674,7 @@ FROM medicines WHERE name = 'Amoxicillin 500mg' LIMIT 1;
 
 INSERT INTO prescription_medicines (prescription_id, medicine_id, dosage, frequency, duration, instructions)
 SELECT
-    'prx33333-3333-3333-3333-333333333333',
+    'ee033333-3333-3333-3333-333333333333',
     id,
     '400mg',
     'As needed (max 3 times daily)',
@@ -688,19 +688,19 @@ FROM medicines WHERE name = 'Ibuprofen 400mg' LIMIT 1;
 
 -- Review 1: John reviews Dr. Johnson (Cardiologist)
 INSERT INTO reviews (appointment_id, doctor_id, patient_id, rating, comment) VALUES
-('apt11111-1111-1111-1111-111111111111', 'd1111111-1111-1111-1111-111111111111', 'p1111111-1111-1111-1111-111111111111',
+('c0011111-1111-1111-1111-111111111111', 'd1111111-1111-1111-1111-111111111111', 'b1111111-1111-1111-1111-111111111111',
 5,
 'Dr. Johnson was excellent! Very thorough examination and took time to explain everything clearly. Highly recommend for cardiac care.');
 
 -- Review 2: David reviews Dr. Kim (Psychiatrist)
 INSERT INTO reviews (appointment_id, doctor_id, patient_id, rating, comment) VALUES
-('apt55555-5555-5555-5555-555555555555', 'd5555555-5555-5555-5555-555555555555', 'p5555555-5555-5555-5555-555555555555',
+('c0055555-5555-5555-5555-555555555555', 'd5555555-5555-5555-5555-555555555555', 'b5555555-5555-5555-5555-555555555555',
 4,
 'Very empathetic and understanding. The breathing exercises and mindfulness techniques have been really helpful. Feeling much better.');
 
 -- Review 3: Emily reviews Dr. Chen (Dermatologist)
 INSERT INTO reviews (appointment_id, doctor_id, patient_id, rating, comment) VALUES
-('apt88888-8888-8888-8888-888888888888', 'd2222222-2222-2222-2222-222222222222', 'p8888888-8888-8888-8888-888888888888',
+('c0088888-8888-8888-8888-888888888888', 'd2222222-2222-2222-2222-222222222222', 'b8888888-8888-8888-8888-888888888888',
 5,
 'Dr. Chen is amazing! My acne has improved significantly. She explained the treatment plan clearly and was very professional.');
 
@@ -710,18 +710,18 @@ INSERT INTO reviews (appointment_id, doctor_id, patient_id, rating, comment) VAL
 
 -- Notifications for patients
 INSERT INTO notifications (profile_id, title, message, type, is_read, related_id) VALUES
-('a1111111-1111-1111-1111-111111111111', 'Appointment Completed', 'Your appointment with Dr. Johnson on September 15, 2026 has been completed.', 'appointment', TRUE, 'apt11111-1111-1111-1111-111111111111'),
-('a1111111-1111-1111-1111-111111111111', 'Prescription Ready', 'Your prescription from Dr. Johnson is now available for viewing.', 'prescription', FALSE, 'prx11111-1111-1111-1111-111111111111'),
-('a2222222-2222-2222-2222-222222222222', 'Appointment Confirmed', 'Your appointment with Dr. Chen on September 24 at 11:00 AM has been confirmed.', 'appointment', FALSE, 'apt22222-2222-2222-2222-222222222222'),
-('a3333333-3333-3333-3333-333333333333', 'Appointment Pending', 'Your appointment request with Dr. Patel is pending confirmation.', 'appointment', TRUE, 'apt33333-3333-3333-3333-333333333333'),
-('a4444444-4444-4444-4444-444444444444', 'Appointment Cancelled', 'Your appointment with Dr. Williams has been cancelled as requested.', 'appointment', TRUE, 'apt44444-4444-4444-4444-444444444444'),
-('a5555555-5555-5555-5555-555555555555', 'Review Submitted', 'Thank you for submitting a review for Dr. Kim!', 'review', TRUE, 'apt55555-5555-5555-5555-555555555555');
+('a1111111-1111-1111-1111-111111111111', 'Appointment Completed', 'Your appointment with Dr. Johnson on September 15, 2026 has been completed.', 'appointment', TRUE, 'c0011111-1111-1111-1111-111111111111'),
+('a1111111-1111-1111-1111-111111111111', 'Prescription Ready', 'Your prescription from Dr. Johnson is now available for viewing.', 'prescription', FALSE, 'ee011111-1111-1111-1111-111111111111'),
+('a2222222-2222-2222-2222-222222222222', 'Appointment Confirmed', 'Your appointment with Dr. Chen on September 24 at 11:00 AM has been confirmed.', 'appointment', FALSE, 'c0022222-2222-2222-2222-222222222222'),
+('a3333333-3333-3333-3333-333333333333', 'Appointment Pending', 'Your appointment request with Dr. Patel is pending confirmation.', 'appointment', TRUE, 'c0033333-3333-3333-3333-333333333333'),
+('a4444444-4444-4444-4444-444444444444', 'Appointment Cancelled', 'Your appointment with Dr. Williams has been cancelled as requested.', 'appointment', TRUE, 'c0044444-4444-4444-4444-444444444444'),
+('a5555555-5555-5555-5555-555555555555', 'Review Submitted', 'Thank you for submitting a review for Dr. Kim!', 'review', TRUE, 'c0055555-5555-5555-5555-555555555555');
 
 -- Notifications for doctors
 INSERT INTO notifications (profile_id, title, message, type, is_read, related_id) VALUES
-('d1111111-1111-1111-1111-111111111111', 'New Appointment Request', 'Ahmed Hassan has requested an appointment for September 27 at 11:30 AM.', 'appointment', FALSE, 'apt77777-7777-7777-7777-777777777777'),
-('d2222222-2222-2222-2222-222222222222', 'Patient Review Received', 'Emily Wilson left a 5-star review for your service!', 'review', FALSE, 'apt88888-8888-8888-8888-888888888888'),
-('d3333333-3333-3333-3333-333333333333', 'Appointment Rejected', 'Appointment with Michael Brown has been rejected due to scheduling conflict.', 'appointment', TRUE, 'apt99999-9999-9999-9999-999999999999');
+('d1111111-1111-1111-1111-111111111111', 'New Appointment Request', 'Ahmed Hassan has requested an appointment for September 27 at 11:30 AM.', 'appointment', FALSE, 'c0077777-7777-7777-7777-777777777777'),
+('d2222222-2222-2222-2222-222222222222', 'Patient Review Received', 'Emily Wilson left a 5-star review for your service!', 'review', FALSE, 'c0088888-8888-8888-8888-888888888888'),
+('d3333333-3333-3333-3333-333333333333', 'Appointment Rejected', 'Appointment with Michael Brown has been rejected due to scheduling conflict.', 'appointment', TRUE, 'c0099999-9999-9999-9999-999999999999');
 
 -- ============================================================================
 -- 10. DATA VERIFICATION & SUMMARY
