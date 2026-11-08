@@ -21,28 +21,52 @@
 -- ============================================================================
 -- 1. PROFILES (Base users for all roles)
 -- ============================================================================
--- Ensure auth.users exist for demo profiles when running in Supabase
+-- Ensure auth.users exist for demo profiles when running in Supabase with password 'password123'
 DO $$
+DECLARE
+    enc_pw TEXT;
 BEGIN
-    INSERT INTO auth.users (id, email, raw_user_meta_data, aud, role)
+    BEGIN
+        SELECT extensions.crypt('password123', extensions.gen_salt('bf')) INTO enc_pw;
+    EXCEPTION WHEN OTHERS THEN
+        BEGIN
+            SELECT crypt('password123', gen_salt('bf')) INTO enc_pw;
+        EXCEPTION WHEN OTHERS THEN
+            enc_pw := '$2a$10$vI8aWBnW3fID.ZQ4/zo1G.q1q1b8Z2qQkP5W3Y4X5Z6A7B8C9D0E1';
+        END;
+    END;
+
+    INSERT INTO auth.users (
+        instance_id,
+        id,
+        aud,
+        role,
+        email,
+        encrypted_password,
+        email_confirmed_at,
+        raw_app_meta_data,
+        raw_user_meta_data,
+        created_at,
+        updated_at
+    )
     VALUES
-        ('a1111111-1111-1111-1111-111111111111', 'john.smith@example.com', '{"full_name": "John Smith"}', 'authenticated', 'authenticated'),
-        ('a2222222-2222-2222-2222-222222222222', 'maria.garcia@example.com', '{"full_name": "Maria Garcia"}', 'authenticated', 'authenticated'),
-        ('a3333333-3333-3333-3333-333333333333', 'li.wei@example.com', '{"full_name": "Li Wei"}', 'authenticated', 'authenticated'),
-        ('a4444444-4444-4444-4444-444444444444', 'sarah.jones@example.com', '{"full_name": "Sarah Jones"}', 'authenticated', 'authenticated'),
-        ('a5555555-5555-5555-5555-555555555555', 'david.chen@example.com', '{"full_name": "David Chen"}', 'authenticated', 'authenticated'),
-        ('a6666666-6666-6666-6666-666666666666', 'olga.petrov@example.com', '{"full_name": "Olga Petrov"}', 'authenticated', 'authenticated'),
-        ('a7777777-7777-7777-7777-777777777777', 'ahmed.hassan@example.com', '{"full_name": "Ahmed Hassan"}', 'authenticated', 'authenticated'),
-        ('a8888888-8888-8888-8888-888888888888', 'emily.wilson@example.com', '{"full_name": "Emily Wilson"}', 'authenticated', 'authenticated'),
-        ('a9999999-9999-9999-9999-999999999999', 'michael.brown@example.com', '{"full_name": "Michael Brown"}', 'authenticated', 'authenticated'),
-        ('d1111111-1111-1111-1111-111111111111', 'dr.johnson@nexivara.com', '{"full_name": "Dr. Robert Johnson"}', 'authenticated', 'authenticated'),
-        ('d2222222-2222-2222-2222-222222222222', 'dr.chen@nexivara.com', '{"full_name": "Dr. Lisa Chen"}', 'authenticated', 'authenticated'),
-        ('d3333333-3333-3333-3333-333333333333', 'dr.patel@nexivara.com', '{"full_name": "Dr. Sanjay Patel"}', 'authenticated', 'authenticated'),
-        ('d4444444-4444-4444-4444-444444444444', 'dr.williams@nexivara.com', '{"full_name": "Dr. Jennifer Williams"}', 'authenticated', 'authenticated'),
-        ('d5555555-5555-5555-5555-555555555555', 'dr.kim@nexivara.com', '{"full_name": "Dr. Min-ji Kim"}', 'authenticated', 'authenticated'),
-        ('d6666666-6666-6666-6666-666666666666', 'dr.rodriguez@nexivara.com', '{"full_name": "Dr. Carlos Rodriguez"}', 'authenticated', 'authenticated'),
-        ('admin001-0000-0000-0000-000000000000', 'admin@nexivara.com', '{"full_name": "System Administrator"}', 'authenticated', 'authenticated')
-    ON CONFLICT (id) DO NOTHING;
+        ('00000000-0000-0000-0000-000000000000', 'a1111111-1111-1111-1111-111111111111', 'authenticated', 'authenticated', 'john.smith@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "John Smith"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a2222222-2222-2222-2222-222222222222', 'authenticated', 'authenticated', 'maria.garcia@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Maria Garcia"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a3333333-3333-3333-3333-333333333333', 'authenticated', 'authenticated', 'li.wei@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Li Wei"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a4444444-4444-4444-4444-444444444444', 'authenticated', 'authenticated', 'sarah.jones@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Sarah Jones"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a5555555-5555-5555-5555-555555555555', 'authenticated', 'authenticated', 'david.chen@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "David Chen"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a6666666-6666-6666-6666-666666666666', 'authenticated', 'authenticated', 'olga.petrov@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Olga Petrov"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a7777777-7777-7777-7777-777777777777', 'authenticated', 'authenticated', 'ahmed.hassan@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Ahmed Hassan"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a8888888-8888-8888-8888-888888888888', 'authenticated', 'authenticated', 'emily.wilson@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Emily Wilson"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'a9999999-9999-9999-9999-999999999999', 'authenticated', 'authenticated', 'michael.brown@example.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Michael Brown"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd1111111-1111-1111-1111-111111111111', 'authenticated', 'authenticated', 'dr.johnson@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Robert Johnson"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd2222222-2222-2222-2222-222222222222', 'authenticated', 'authenticated', 'dr.chen@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Lisa Chen"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd3333333-3333-3333-3333-333333333333', 'authenticated', 'authenticated', 'dr.patel@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Sanjay Patel"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd4444444-4444-4444-4444-444444444444', 'authenticated', 'authenticated', 'dr.williams@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Jennifer Williams"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd5555555-5555-5555-5555-555555555555', 'authenticated', 'authenticated', 'dr.kim@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Min-ji Kim"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'd6666666-6666-6666-6666-666666666666', 'authenticated', 'authenticated', 'dr.rodriguez@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "Dr. Carlos Rodriguez"}', NOW(), NOW()),
+        ('00000000-0000-0000-0000-000000000000', 'admin001-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'admin@nexivara.com', enc_pw, NOW(), '{"provider":"email","providers":["email"]}', '{"full_name": "System Administrator"}', NOW(), NOW())
+    ON CONFLICT (id) DO UPDATE SET encrypted_password = EXCLUDED.encrypted_password, email_confirmed_at = EXCLUDED.email_confirmed_at;
 EXCEPTION
     WHEN OTHERS THEN
         NULL;
